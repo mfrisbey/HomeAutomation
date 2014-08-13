@@ -1,0 +1,86 @@
+<!--
+/*
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+-->
+
+<html>
+<head>
+	<title>Home Automation</title>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="style/automation.css">
+	<link rel="stylesheet" type="text/css" href="style/panelButtonPlugin.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+	<script src="js/automationPlugin.js"></script>
+	<script src="js/imageTogglePlugin.js"></script>
+	<script src="js/homeAutomation.js"></script>
+	<script src="js/panelButtonPlugin.js"></script>
+</head>
+	<body>
+		<div id="header">
+			<h1>Home Automation</h1>
+			<p>This is a home automation system. Press the buttons in the panel below to control various functions of the home.</p>
+		</div>
+		
+		<div id="content">
+			<div id="control-panel">
+				<div id="temp-controls">
+					<a href="#" id="temp-up" data-temp-action="up"></a>
+					<a href="#" id="temp-down"></a>
+					<span id="temp-text"><span id="curr-temp">0</span>&deg;</span>
+				</div>
+				
+				<div id="right-bar">
+					<div id="light-attic-on-off" class="right-button-bar"></div>
+					<div id="light-entry-on-off" class="right-button-bar"></div>
+					<div id="fireplace-on-off" class="right-button-bar"></div>
+				</div>
+				
+				<div id="bottom-bar">
+					<div id="light-left-bed-on-off" class="bottom-button-bar"></div>
+					<div id="light-right-bed-on-off" class="bottom-button-bar"></div>
+					<div id="curtain-open-close" class="bottom-button-bar"></div>
+				</div>
+			</div>
+			<div id="house">
+				<div id="house-left-bed-light" class="house-appliance">
+					<span id="house-left-bed-light-on"></span>
+					<span id="house-left-bed-light-off"></span>
+				</div>
+				<div id="house-right-bed-light" class="house-appliance">
+					<span id="house-right-bed-light-on"></span>
+					<span id="house-right-bed-light-off"></span>
+				</div>
+				<div id="house-attic-light" class="house-appliance">
+					<span id="house-attic-light-on"></span>
+					<span id="house-attic-light-off"></span>
+				</div>
+				<div id="house-entry-light" class="house-appliance">
+					<span id="house-entry-light-on"></span>
+					<span id="house-entry-light-off"></span>
+				</div>
+				<div id="house-curtain" class="house-appliance">
+					<span id="house-curtain-open"></span>
+					<span id="house-curtain-closed"></span>
+				</div>
+				<div id="house-fireplace" class="house-appliance">
+					<span id="house-fireplace-on"></span>
+					<span id="house-fireplace-off"></span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
