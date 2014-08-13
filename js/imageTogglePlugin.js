@@ -36,9 +36,7 @@
 	
 	/** 
 	 * Does the work of converting an element into an image toggle. The function
-	 * assumes that onElement and offElement are immediate children of the element
-	 * being converted into an imageToggle. It's also assumed that the active/inactive
-	 * images are the same size.
+	 * assumes that  the active/inactive images are the same size.
 	 *
 	 * Invoking this method on a previously-initialized imageToggle element will
 	 * toggle the element between its active and inactive state.
@@ -56,18 +54,19 @@
 		if (initialized) {
 			// plugin has already been initialized, toggle between active
 			// and inactive.
-			doToggle($("#" + this.data("toggle-on-element")));
+			doToggle($("#" + this.data("toggle-on-element")), $("#" + this.data("toggle-off-element")));
 		} else {
 			// plugin is uninitialized. do initialization routine
 			this.data("toggle-on-element", onElement.attr("id"));
+            this.data("toggle-off-element", offElement.attr("id"));
 			
 			// add user provided options and set defaults for those not provided
 			var props = $.extend( {}, defaults, options) ;
 			
 			// apply styling to toggle elements. This will, in essence, "stack" the
 			// images on top of each other and make the inactive element visible
-			prepareToggleElement(onElement, onElement, props, props.toggleOnUrl, -1);
-			prepareToggleElement(offElement, onElement, props, props.toggleOffUrl, 2);
+			prepareToggleElement(onElement, onElement, offElement, props, props.toggleOnUrl, true);
+			prepareToggleElement(offElement, onElement, offElement, props, props.toggleOffUrl, false);
 		}
 		
         return this;
@@ -78,13 +77,13 @@
 	 * 
 	 * @param element The element that will be converted into a toggle image.
 	 * @param onElement The element that will be displayed when the toggle is active.
+     * @param offElement The element that will be displayed when the toggle is inactive.
 	 * @param props The custom options that the can change the way the plugin
 	 *        behaves.
 	 * @param url The image that will be used for the toggle state.
-	 * @param zIndex The z-index that will be used for the element. If less than 0
-	 *        then no z-index will be applied.
+	 * @param hidden Whether or not the element will be hidden initially.
 	 */
-	function prepareToggleElement(element, onElement, props, url, zIndex) {
+	function prepareToggleElement(element, onElement, offElement, props, url, hidden) {
 		// add back ground, size element, and position element
 		element.css("background", "white url("+url+") no-repeat 0 0");
 		element.css("background-size", props.width+" "+props.height);
@@ -92,9 +91,9 @@
 		element.css("width", props.width);
 		element.css("height", props.height);
 		
-		// set z-index of the element.
-		if (zIndex >= 0) {
-			element.css("z-index", zIndex);
+		// set visibility of the element.
+		if (hidden) {
+			element.css("display", "none");
 		}
 		
 		// if clicking is enabled, wire up the element so that clicking it
@@ -103,28 +102,32 @@
 			element.click(function(e) {
 				e.preventDefault();
 				
-				doToggle(onElement);
+				doToggle(onElement, offElement);
 			});
 		}
 	}
 	
 	/** 
-	 * Toggles the element by swapping its z-index value between and visible and
-	 * non-visible state.
+	 * Toggles the element by swapping the visibility of the on/off elements.
 	 * 
-	 * @param onElement The element whose z-index will be modified.
+	 * @param onElement The element that is visible in the active state.
+     * @param offElement The element that is visible in the inactive state.
 	 */
-	function doToggle(onElement) {
-		var currIndex = onElement.css("z-index");
+	function doToggle(onElement, offElement) {
+		var currVisible = onElement.css("display");
+        var currOffVisible = "inline";
 		
-		if (currIndex == 3) {
-			// element is visible, hide it
-			currIndex = 0;
+		if (currVisible == "none") {
+			// element is invisible, show it
+            currVisible = "inline";
+            currOffVisible = "none";
 		} else {
 			// element is visible, show it
-			currIndex = 3;
+            currVisible = "none";
+            currOffVisible = "inline";
 		}
 		
-		onElement.css("z-index", currIndex);
+		onElement.css("display", currVisible);
+        offElement.css("display", currOffVisible);
 	}
 }( jQuery, window, document ));

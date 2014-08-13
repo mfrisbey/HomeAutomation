@@ -42,7 +42,7 @@
     var defaults = {
 		buttonLabel: "[Label]",
 		toggleOnUrl: "",
-		toggleOnUrl: "",
+		toggleOff   Url: "",
 		width: 0,
 		height: 0,
 		dataKey: "",
