@@ -98,7 +98,7 @@
 				
 				// determine if the state of toggle element is not active and change
 				// the value sent back to the server
-				if  (toggleOnElement.css("z-index") < toggleOffElement.css("z-index")) {
+				if  (toggleOnElement.css("display") == "none") {
 					retVal = "!"+retVal;
 				}
 				
